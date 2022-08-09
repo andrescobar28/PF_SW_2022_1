@@ -70,7 +70,7 @@
 
 .modalDialog > div {
 	width: 500px;
-    height: 350px;
+    height: 400px;
 	position: relative;
 	margin: 10% auto;
 	padding: 5px 20px 13px 20px;
@@ -264,20 +264,20 @@ p{
 
 button{
     width: 250px;
-    color: #000;
+    color: white;
     font-size: 12px;
     padding: 12px 0;
-    background: yellowgreen;
+    background: black;
     border: 0;
     border-radius: 20px;
     outline: none;
-    margin-top: 30px;
+    margin-top: 15px;
     cursor: pointer;
 }
 
 button:hover{
-    color: yellowgreen;
-    background: black;
+    color: white;
+    background: blue;
 }
 
 h5{

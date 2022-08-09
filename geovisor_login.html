@@ -71,7 +71,7 @@
 
             <div id="openModal" class="modalDialog">
                 <div>
-                    <a href="#close" title="Close" class="close">X</a>
+                    <a href="geovisor_login.html" title="Close" class="close" onclick="alert('Esta acción cancelará el reporte.')">X</a>
                     <center><h1 class="titulo">NUEVO REPORTE</h1></center><br>
                     <form>
                         <label class = "texto"></label>> Escribir la dirección del reporte: </label>
@@ -90,9 +90,26 @@
                         <br><label class = "texto">> Seleccione la fecha actual del reporte:</label>
                         <input type="date" name="fecha">
                         <label class = "texto">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hora:</label>
-                        <input type="time" name="hora"><br>
-                        <br><center><input type="checkbox" name="casilla" value="1">&nbsp;Aceptar términos y condiciones</center>
-                        <br><center><button class = "btn2"> Reportar </button></center><br>
+                        <input type="time" name="hora"><br><br>
+                        <label class = "texto">>Seleccionar intensidad del daño [Regular - Malo - Muy Malo]:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                        <input type="range" name="rango"
+                            min="1" max="3" list="lista-rango">
+                            <datalist id="lista-rango">
+                            <option value="1" label="Regular">
+                            <option value="2" label="Malo">
+                            <option value="3" label="Muy Malo">
+                            </datalist>
+                        <br><br><center><input type="checkbox" name="casilla" value="1">&nbsp;Aceptar términos y condiciones</center>
+                        
+                        <!--<a href="#close" title="Reportar" class="btn">Reportar</a>-->
+                        
+                        
+                        <a href="geovisor_login.html" title="Reportar" class="btn2">
+                            <center><button onclick="alert('Se ha realizado el reporte con éxito!')" type="button"> Reportar </button></center>
+                        </a>
+
+
+                        
                         
 
                     </form>
