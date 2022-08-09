@@ -61,17 +61,49 @@
         <!-- Se define la ubicación del mapa y flecha norte-->
         <div id="map" class="map">
             <img id="norte" src="iconos/norte.png" class="norte" style="z-index:9999"></img>
-            <!--<a href="web.html">
-                <button type="button" class = "volver"> VOLVER AL INICIO </button>
-            </a>-->
+            <a href="#openModal">
+                <button type="button" class = "botones"> NUEVO REPORTE </button>
+            </a>
     
             <!--<a href="web.html">
                 <button type="button" class = "nuevo"> AÑADIR NUEVO ATRACTIVO </button>
             </a> NO PUDE :c-->
-    
+
+            <div id="openModal" class="modalDialog">
+                <div>
+                    <a href="#close" title="Close" class="close">X</a>
+                    <center><h1 class="titulo">NUEVO REPORTE</h1></center><br>
+                    <form>
+                        <label class = "texto"></label>> Escribir la dirección del reporte: </label>
+                        <input type="text" name="direccion" size="40" placeholder="Escribir dirección"><br><br>
+                        <label class ="texto">> Selecionar el tipo de reporte:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                        <select name="menu">
+                            <option value="0">...</option>
+                            <option value="1">Deformaciones</option>
+                            <option value="2">Pérdida de las capas de la estructura</option>
+                            <option value="3">Daños superficiales</option>
+                            <option value="4">Fisuras</option>
+                            <option value="5">Otro tipo de irregularidad en la infraestructura vial</option>
+                        </select><br><br>
+                        <label class="texto">> Agregue una dirección acerca de la irregularidad en la infraestructrua vial:</label><br><br>
+                        <center><textarea name="descripcion" class = "textarea" placeholder="Describa brevemente el caso a reportar..."></textarea></center>
+                        <br><label class = "texto">> Seleccione la fecha actual del reporte:</label>
+                        <input type="date" name="fecha">
+                        <label class = "texto">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hora:</label>
+                        <input type="time" name="hora"><br>
+                        <br><center><input type="checkbox" name="casilla" value="1">&nbsp;Aceptar términos y condiciones</center>
+                        <br><center><button class = "btn2"> Reportar </button></center><br>
+                        
+
+                    </form>
+                    
+                </div>
+            </div>
+            
+
             
         </div>
-    
+
     </body>
 
     <script>
@@ -103,12 +135,125 @@
 
         // Añadir capa de comunas al mapa
         var comunas_cali = L.geoJson(comunas)//.addTo(map);
-
+        
+        // Añadir capa de barrios al mapa
         var barrios_cali = L.geoJson(barrios)//.addTo(map);
+        
+        // Se añade capa de suelos de protección agricola rural de la IDESC
+        var perimetro_urbano = L.tileLayer.wms('http://ws-idesc.cali.gov.co:8081/geoserver/pot_2014/wms?service=WMS&version=1.1.0',
+            {
+            layers: 'pot_2014:bcs_lim_perimetro_urbano',
+            format: 'image/png',
+            transparent: true,
+            opacity: 1
+            });
+            map.addLayer(perimetro_urbano);
 
-        // Añadir capa de comunas a la leyenda
+        // Se añade capa de ecoparqeues de la IDESC
+        var ecoparques = L.tileLayer.wms('http://ws-idesc.cali.gov.co:8081/geoserver/wms?service=WMS&version=1.1.0',
+            {
+            layers: 'pot_2014:amb_eep_aeie_ecoparques',
+            format: 'image/png',
+            transparent: true,
+            opacity: 0.4
+            });
+            map.addLayer(ecoparques);	
+        
+        // Se añade capa de corredores ambientales de la IDESC
+        var corredores = L.tileLayer.wms('http://ws-idesc.cali.gov.co:8081/geoserver/wms?service=WMS&version=1.1.0',
+            {
+            layers: 'pot_2014:amb_eep_corredores_ambientales',
+            format: 'image/png',
+            transparent: true,
+            opacity: 0.3
+            });
+            map.addLayer(corredores);
+        
+        // Se añade capa de suelos de protección agricola rural de la IDESC
+        var proteccion_agricola = L.tileLayer.wms('http://ws-idesc.cali.gov.co/geoserver/pot_2014/wms?service=WMS&version=1.1.0',
+            {
+            layers: 'pot_2014:nru_suelo_proteccion_agricola',
+            format: 'image/png',
+            transparent: true,
+            opacity: 1
+            });
+            map.addLayer(proteccion_agricola);	
+        
+        	
+        
+        // Se añaden capas a la leyenda del mapa
         leyenda.addOverlay(comunas_cali, 'Comunas');
         leyenda.addOverlay(barrios_cali, 'Barrios');
+        leyenda.addOverlay(ecoparques, 'Ecoparques');
+        leyenda.addOverlay(corredores, 'Corredores Ambientales');
+        leyenda.addOverlay(proteccion_agricola, 'Protección Agrícola Rural');
+
+        // Se añade escala numérica
+        L.control.scale({position:'bottomleft'}).addTo(map);
+
+        // Se añade escala gráfica
+        L.control.betterscale({position:'bottomright'}).addTo(map);
+        
+        // Se añade escala de factor
+        L.control.scalefactor().addTo(map);
+
+        // Se añade minimapa
+        var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+	    var osmAttrib='Map data &copy; OpenStreetMap contributors';
+	
+	    var osm2 = new L.TileLayer(osmUrl, {minZoom: 0, maxZoom: 8, attribution: osmAttrib });
+		var miniMap2 = new L.Control.MiniMap(osm2, { toggleDisplay: true }).addTo(map);
+
+        // Se añade cuadrícula
+        L.latlngGraticule({
+                showLabel: true,
+                opacity:0.5,
+                weight: 0.5,
+                color: 'black',
+                zoomInterval: [
+                    {start: 10, end: 18, interval: 0.1}
+                ]
+            }).addTo(map);
+        
+        // Añadir botón de restauración
+        L.easyButton('<img src="iconos/restart.png"  align="absmiddle" height="16px" >', function() 
+            {
+            alert('Se mostrará la VISTA PRINCIPAL del Geovisor.');
+            location.reload();
+        }).addTo(map);
+
+        var drawnItems = new L.FeatureGroup();
+
+                var drawControl = new L.Control.Draw({
+                    position: 'topleft',
+                    edit: {
+                        featureGroup: drawnItems,
+                        remove: true,
+                        edit: false,
+                    },
+                    draw: {
+                        circlemarker: true,
+                        circle:true,
+                        rectangle:false,
+                        marker:false,
+                    }
+                });
+                map.addControl(drawControl);
+                
+        map.on(L.Draw.Event.CREATED, function (e) {
+                    var type = e.layerType,
+                        layer = e.layer;
+
+                    if (type === 'marker') {
+                        layer.bindPopup('A popup!');
+                    }
+
+                    drawnItems.addLayer(layer);
+                    map.addLayer(drawnItems);
+                });
+
+        map.spin(false);
+
 
     </script>
     
