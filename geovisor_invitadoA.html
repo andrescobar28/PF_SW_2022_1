@@ -63,12 +63,9 @@
         <!-- Se define la ubicación del mapa y flecha norte-->
         <div id="map" class="map">
             <img id="norte" src="iconos/norte.png" class="norte" style="z-index:9999"></img>
-            <a href="#openModal">
-                <button type="button" class = "botones"> NUEVO REPORTE </button>
-            </a>
 
             <a href="indexA.html">
-                <button type="button" class = "botones2" onclick="alert('Regresará a la página de inicio de DIV-CALI!')"> VOLVER AL INICIO </button>
+                <button type="button" class = "botones" onclick="alert('Regresará a la página de inicio de DIV-CALI!')"> VOLVER AL INICIO </button>
             </a>  
 
 
@@ -127,7 +124,7 @@
         {
             minZoom: 12,
             maxZoom: 18,
-        }).setView([3.410905799228057, -76.5297088494141], 15);
+        }).setView([3.410905799228057, -76.5297088494141], 10);
 
         // Definición de mapa base
         var Mapa_Base = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', 
@@ -209,7 +206,7 @@
         var estilo2 = 
 		{
 			radius: 5,
-			fillColor: "black",
+			fillColor: "red",
 			color: "black",
 			weight: 1,
 			opacity: 1,

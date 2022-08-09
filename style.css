@@ -20,6 +20,21 @@
     background: blue;
 }
 
+.botones2{
+    position:fixed;
+    width: 150px;
+    z-index: 9999;
+    left: 20%;
+    color: white;
+    background: black;
+    margin-top: 25px;
+}
+
+.botones2:hover{
+    color: white;
+    background: blue;
+}
+
 .norte{
 	position:fixed;
 	width:3%;
@@ -35,6 +50,11 @@
  .texto{
     color: black;
  }
+
+ .texto2{
+    color: white;
+ }
+
 
 .titulo{
     color: blue;
@@ -112,6 +132,7 @@ transition: opacity 400ms ease-in;
     justify-content: center;
     align-items: center;
 }
+
 .login{
     display: flex;
     justify-content: space-around;
@@ -120,6 +141,14 @@ transition: opacity 400ms ease-in;
 .btn{
     margin: 5px 0;
     width: 150px;
+    z-index: 9999;
+    color: white;
+    background: black;
+}
+
+.btn_form{
+    margin: 5px 0;
+    width: 200px;
     z-index: 9999;
     color: white;
     background: black;

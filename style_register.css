@@ -116,6 +116,24 @@ main {
 	transition: .1s ease all;
 }
 
+button{
+    width: 250px;
+    color: white;
+    font-size: 12px;
+    padding: 12px 0;
+    background: black;
+    border: 0;
+    border-radius: 20px;
+    outline: none;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+button:hover{
+    color: white;
+    background: blue;
+}
+
 .formulario__btn:hover {
 	box-shadow: 3px 0px 30px rgba(163,163,163, 1);
 }

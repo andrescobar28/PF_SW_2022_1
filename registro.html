@@ -7,16 +7,17 @@
 	<link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"> 
 	<link rel="stylesheet" href="style_register.css">
+
 </head>
 <body>
 	
 	<main>
-		<form class="formulario" id="formulario" action="registro.php" method="POST">
+		<form class="formulario" id="formulario">
 			<!-- Grupo: Usuario -->
 			<div class="formulario__grupo" id="grupo__usuario">
 				<label for="usuario" class="formulario__label">Usuario</label>
 				<div class="formulario__grupo-input">
-					<input type="text" class="formulario__input" name="usuario" id="usuario" placeholder="Ingrese el Usuario (Numero de Documento)">
+					<input type="text" class="formulario__input" name="usuario" id="usuario" placeholder="Ingrese Usuario (Código)">
 					<i class="formulario__validacion-estado fas fa-times-circle"></i>
 				</div>
 				<p class="formulario__input-error">El usuario tiene que ser de 8 a 10 dígitos y solo puede contener numeros.</p>
@@ -84,12 +85,14 @@
 				<p><i class="fas fa-exclamation-triangle"></i> <b>Error:</b> Por favor rellena el formulario correctamente. </p>
 			</div>
 
-			<div class="formulario__grupo formulario__grupo-btn-enviar" >
-				
-				<button id="enviar" type="submit" class="formulario__btn" >Enviar</button>
-				<!--<p class="formulario__mensaje-exito" id="formulario__mensaje-exito">Formulario enviado exitosamente!</p>-->
-				<!-- action="registro.php" method="POST" -->
+			<div>
+				<a href="index.html" title="Registrar" class="button">
+					<center><button name = "registro" onclick="alert('Se ha registrado con éxito!!')" type="button"> REGISTRAR </button></center>
+				</a>
 			</div>
+
+
+
 		</form>
 	</main>
 
